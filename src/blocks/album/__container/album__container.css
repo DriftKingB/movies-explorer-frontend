@@ -1,0 +1,21 @@
+.album__container {
+  display: grid;
+  gap: 37px 24px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 1280px) {
+  .album__container {
+    gap: calc((175vw + 2496px)/128) calc((-75vw + 2496px)/64) ; /* 768px: 30px 30px */
+  }
+}
+
+@media (max-width: 768px) {
+  .album__container {
+    gap: calc((25vw + 18px)/7); /* 320px: 14px */
+    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  }
+}

@@ -1,0 +1,11 @@
+.search__finder {
+  height: 46px;
+  width: 100%;
+  padding-right: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 42px;
+  background-color: #F9F9F9;
+  border-radius: 40px;
+}

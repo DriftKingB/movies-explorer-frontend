@@ -1,0 +1,21 @@
+.sidebar__container {
+  width: 520px;
+  height: 100%;
+  background-color: #fff;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .sidebar__container {
+    width: calc((625vw + 2480px)/14); /* 320px: 320px */
+  }
+}
+
+@media (max-width: 500px) {
+  .sidebar__container {
+    width: 100%;
+  }
+}

@@ -1,0 +1,19 @@
+.navbar__link_type_signup {
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.21;
+  margin-right: 30px;
+}
+
+.navbar__link_type_signup:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .navbar__link_type_signup {
+    margin-right: calc((25vw + 18px)/7); /* 320px: 14px */
+    font-size: calc((25vw + 480px)/56); /* 320px: 10px */
+  }
+}

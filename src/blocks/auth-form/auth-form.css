@@ -1,0 +1,13 @@
+.auth-form {
+  width: 396px;
+  min-height: 572px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .auth-form {
+    width: calc((425vw + 2280px)/14); /* 320px: 260px */
+  }
+}

@@ -1,0 +1,26 @@
+.student__photo {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media (max-width: 1280px) {
+  .student__photo {
+    width: calc((375vw + 29760px)/128); /* 768px: 255px */
+    height: calc((125vw + 8864px)/32); /* 768px: 307px */
+  }
+}
+
+@media (max-width: 768px) {
+  .student__photo {
+    width: calc((-925vw + 35664px)/112); /* 320px: 292px */
+    height: calc((-1125vw + 43024px)/112); /* 320px: 352px */
+  }
+}
+
+@media (max-width: 700px) {
+  .student__photo {
+    margin-bottom: 40px;
+  }
+}

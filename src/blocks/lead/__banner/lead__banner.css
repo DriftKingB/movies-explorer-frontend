@@ -1,0 +1,23 @@
+.lead__banner {
+  width: 722px;
+  height: 244px;
+  background-image: url(../../../images/lead__banner.svg);
+  align-self: flex-end;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 1280px) {
+  .lead__banner {
+    width: calc((525vw + 39488px)/64); /* 768px: 680px */
+    height: calc((175vw + 13376px)/64); /* 768px: 230px */
+  }
+}
+
+@media (max-width: 768px) {
+  .lead__banner {
+    height: 230px;
+    width: 680px;
+    align-self: auto;
+  }
+}

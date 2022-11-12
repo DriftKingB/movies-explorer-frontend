@@ -1,0 +1,11 @@
+.footer__subline-nav {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 340px) {
+  .footer__subline-nav {
+    flex-direction: column;
+    margin-bottom: 30px
+  }
+}

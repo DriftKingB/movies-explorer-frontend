@@ -1,0 +1,14 @@
+.footer__subline-copyright {
+  color: #000;
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.42;
+}
+
+@media (max-width: 340px) {
+  .footer__subline-copyright {
+    color: #A0A0A0;
+    font-size: 12px;
+  }
+}

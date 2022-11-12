@@ -1,0 +1,19 @@
+.auth-form__submit-subline-link {
+  display: inline-block;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #3456F3;
+  text-decoration: none;
+}
+
+.auth-form__submit-subline-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .auth-form__submit-button {
+    font-size: calc((25vw + 592px)/56); /* 320px: 12px */
+  }
+}

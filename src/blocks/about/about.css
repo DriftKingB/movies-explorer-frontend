@@ -1,0 +1,15 @@
+.about {
+  padding: 110px 70px 140px;
+}
+
+@media (max-width: 1280px) {
+  .about {
+    padding: calc((125vw + 1920px)/32) calc((125vw + 640px)/32) calc((625vw + 960px)/64); /* 768px: 90px 50px 90px */
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: calc((125vw + 1560px)/28) calc((50vw - 34px)/7) ; /* 768px: 70px 18px */
+  }
+}

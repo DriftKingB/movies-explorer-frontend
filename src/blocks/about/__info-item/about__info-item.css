@@ -1,0 +1,11 @@
+.about__info-item {
+  max-width: 41vw;
+  height: 100%;
+}
+
+@media (max-width: 450px) {
+  .about__info-item {
+    max-width: 100%;
+    margin-bottom: 56px;
+  }
+}

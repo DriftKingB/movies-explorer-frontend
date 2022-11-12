@@ -1,0 +1,14 @@
+.search__submit-button {
+  padding: 0;
+  color: #fff;
+  width: 59px;
+  height: 34px;
+  border: none;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.42;
+  background-color: #3456F3;
+  border-radius: 48px;
+  cursor: pointer;
+  user-select: none;
+}

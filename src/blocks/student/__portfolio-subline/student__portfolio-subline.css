@@ -1,0 +1,15 @@
+.student__portfolio-subline {
+  color: #A0A0A0;
+  margin: 0;
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.21;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .student__portfolio-subline {
+    font-size: calc((25vw + 312px)/28); /* 320px: 14px */
+  }
+}

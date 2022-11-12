@@ -1,0 +1,17 @@
+.footer {
+  height: 172px;
+  padding: 79px 70px 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1280px) {
+  .footer {
+    padding: 79px calc((1225vw - 5568px)/128) 20px; /* 768px: 79px 30px 20px */
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 79px calc((125vw - 120px)/28) calc((125vw + 160px)/56); /* 320px: 10px */;
+  }
+}

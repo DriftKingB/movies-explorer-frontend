@@ -1,0 +1,25 @@
+.navbar__link_type_account-info {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 20px;
+  width: 100;
+  height: 32px;
+  background-color: #F9F9F9;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.21;
+  border-radius: 15px;
+}
+
+.navbar__link_type_account-info:active {
+  transform: translateY(1px);
+}
+
+
+@media (max-width: 768px) {
+  .navbar__link_type_account-info {
+    display: none;
+  }
+}

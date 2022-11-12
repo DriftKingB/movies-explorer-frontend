@@ -1,0 +1,27 @@
+.search__input {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.21;
+  background-color: transparent;
+  padding-left: 22px;
+  border-radius: 40px;
+  user-select: none;
+}
+
+.search__input:focus {
+  outline: none;
+}
+
+.search__input::placeholder {
+  color: #A0A0A0;
+}
+
+@media (max-width: 768px) {
+  .search__input {
+    font-size: calc((25vw + 536px)/56); /* 320px: 11px */
+  }
+}

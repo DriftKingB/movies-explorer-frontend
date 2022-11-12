@@ -1,0 +1,15 @@
+.section-title {
+  margin: 0;
+  width: 100%;
+  min-height: 50px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.21;
+  border-bottom: 1px #000 solid;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: calc((25vw + 424px)/28); /* 320px: 18px */
+  }
+}

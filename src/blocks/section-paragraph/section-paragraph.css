@@ -1,0 +1,27 @@
+.section-paragraph {
+  color: #000;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.42;
+}
+
+@media (max-width: 1280px) {
+  .section-paragraph {
+    font-size: calc((25vw + 576px)/64); /* 768px: 12px */
+  }
+}
+
+@media (max-width: 768px) {
+  .section-paragraph {
+    font-size: 12px
+  }
+}
+
+@media (max-width: 320px) {
+  .section-paragraph {
+    font-size: 11px
+  }
+}
+
+

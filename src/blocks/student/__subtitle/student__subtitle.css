@@ -1,0 +1,28 @@
+.student__subtitle {
+  margin: 0;
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.21;
+  margin-bottom: 26px;
+}
+
+@media (max-width: 1280px) {
+  .student__subtitle {
+    font-size: calc((75vw + 192px)/64); /* 768px: 12px */
+    margin-bottom: calc((75vw + 704px)/64); /* 768px: 20px */
+  }
+}
+
+@media (max-width: 768px) {
+  .student__subtitle {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .student__subtitle {
+    font-size: 11px;
+  }
+}

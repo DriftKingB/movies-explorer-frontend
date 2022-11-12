@@ -1,0 +1,21 @@
+.auth-form__title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.21;
+  font-weight: 500;
+  margin-bottom: 40px;
+  align-self: flex-start;
+}
+
+@media (max-width: 768px) {
+  .auth-form__title {
+    margin-bottom: calc((-125vw + 1520px)/14); /* 320px: 80px */
+  }
+}
+
+@media (max-width: 450px) {
+  .auth-form__title {
+    align-self: center;
+    text-align: center;
+  }
+}

@@ -1,0 +1,21 @@
+.footer__subline-link {
+  color: #000;
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.42;
+}
+
+.footer__subline-link:not(:last-of-type) {
+  margin-right: 20px;
+}
+
+@media (max-width: 340px) {
+  .footer__subline-link {
+    font-size: 12px;
+  }
+
+  .footer__subline-link:not(:last-of-type) {
+    margin: 0 0 12px;
+  }
+}

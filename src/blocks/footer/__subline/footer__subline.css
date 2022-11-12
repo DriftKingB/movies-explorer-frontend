@@ -1,0 +1,11 @@
+.footer__subline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 340px) {
+  .footer__subline {
+    flex-direction: column-reverse;
+  }
+}
