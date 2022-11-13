@@ -26,7 +26,7 @@ export default function Login({ title }) {
         heading={"Рады видеть!"}
         submitText={"Войти"}
         submitSublineText={"Ещё не зарегистрированы?"}
-        submitSublineLink={ <Link to="/signin" className="auth-form__submit-subline-link"> Регистрация </Link> }
+        submitSublineLink={ <Link to="/signup" className="auth-form__submit-subline-link"> Регистрация </Link> }
       />
     </section>
   )

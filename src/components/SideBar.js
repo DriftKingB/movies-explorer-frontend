@@ -7,7 +7,7 @@ export default function SideBar() {
 
   return (
     <section className="sidebar sidebar_active">
-      <button className="sidebar__close-button" />
+      <button className="sidebar__close-button" type="button" />
       <div className="sidebar__container">
         <nav className="sidebar__nav">
           <div className="sidebar__utils">

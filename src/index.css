@@ -1,6 +1,7 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
 @import url(./blocks/root/root.css);
+@import url(./blocks/main/main.css);
 
 @import url(./blocks/logo/logo.css);
 @import url(./blocks/logo/_location/logo_location_form.css);
@@ -56,6 +57,7 @@
 @import url(./blocks/student/__info-link/student__info-link.css);
 @import url(./blocks/student/__photo/student__photo.css);
 @import url(./blocks/student/__portfolio-link/student__portfolio-link.css);
+@import url(./blocks/student/__portfolio-link-text/student__portfolio-link-text.css);
 @import url(./blocks/student/__portfolio-subline/student__portfolio-subline.css);
 @import url(./blocks/student/__portfolio/student__portfolio.css);
 @import url(./blocks/student/__portfolio-nav/student__portfolio-nav.css);

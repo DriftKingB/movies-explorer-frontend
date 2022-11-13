@@ -10,9 +10,8 @@
   border-radius: 8px;
   background-color: #F9F9F9;
   margin-top: 10px;
-  user-select: all;
 }
 
 .auth-form__input:focus {
-  outline: none;
+  outline: 1px #3456F3 solid;
 }

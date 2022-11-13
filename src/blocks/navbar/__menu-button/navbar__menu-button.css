@@ -2,6 +2,7 @@
   width: 44px;
   height: 44px;
   background-image: url(../../../images/navbar__menu-button.svg);
+  background-color: transparent;
   display: none;
   cursor: pointer;
   border: none;

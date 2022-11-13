@@ -38,7 +38,7 @@ export default function NavBar({ dark }) {
           </> :
           <>
             <Link to="/profile" className="navbar__link navbar__link_type_account-info"> Аккаунт </Link>
-            <button className="navbar__menu-button" />
+            <button className="navbar__menu-button" type="button" />
           </>
         }
       </div>

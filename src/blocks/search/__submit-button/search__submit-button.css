@@ -1,4 +1,7 @@
 .search__submit-button {
+  position: absolute;
+  right: 6px;
+  top: 6px;
   padding: 0;
   color: #fff;
   width: 59px;
@@ -11,4 +14,9 @@
   border-radius: 48px;
   cursor: pointer;
   user-select: none;
+  transition: opacity 0.2s;
+}
+
+.search__submit-button:hover {
+  opacity: 0.8;
 }

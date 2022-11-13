@@ -4,13 +4,9 @@ import Header from "../Header";
 import Lead from "./Lead";
 import Student from "./Student";
 import Tech from "./Tech";
-import { useContext, useEffect } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useEffect } from "react";
 
 export default function Landing({ title }) {
-  const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
-
   useEffect(() => {
     document.title = title;
   }, [])
@@ -20,10 +16,12 @@ export default function Landing({ title }) {
       <Header
         dark={true}
       />
-      <Lead />
-      <About />
-      <Tech />
-      <Student />
+      <section className="main">
+        <Lead />
+        <About />
+        <Tech />
+        <Student />
+      </section>
       <Footer />
     </>
   )

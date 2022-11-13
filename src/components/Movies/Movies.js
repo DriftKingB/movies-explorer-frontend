@@ -1,12 +1,12 @@
-import Album from '../Album'
-import Header from '../Header'
-import Search from '../Search'
-import Footer from '../Footer'
-import AlbumCard from '../AlbumCard'
-import { useEffect } from 'react'
-import SideBar from '../SideBar'
+import Footer from "../Footer";
+import Header from "../Header";
+import Album from "../Album";
+import Search from "../Search";
+import AlbumCard from "../AlbumCard";
+import { useEffect } from "react";
+import SideBar from "../SideBar";
 
-export default function Saved({ title }) {
+export default function Movies({ title }) {
   useEffect(() => {
     document.title = title;
   }, [])
@@ -16,7 +16,7 @@ export default function Saved({ title }) {
       <Header />
       <section className="main">
         <Search
-          shortsChecked={false}
+          shortsChecked={true}
         />
         <Album
           cards={
@@ -25,32 +25,30 @@ export default function Saved({ title }) {
                 img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
                 title={"33 слова о дизайне"}
                 subline={"1ч 47м"}
-                isSaved={true}
               />
               <AlbumCard
                 img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
                 title={"33 слова о дизайне"}
                 subline={"1ч 47м"}
                 isLiked={true}
-                isSaved={true}
               />
               <AlbumCard
                 img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
                 title={"33 слова о дизайне"}
                 subline={"1ч 47м"}
-                isSaved={true}
               />
               <AlbumCard
                 img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
                 title={"33 слова о дизайне"}
                 subline={"1ч 47м"}
                 isLiked={true}
-                isSaved={true}
               />
             </>
           }
         />
-        <section className="more" />
+        <section className="more">
+          <button className="more__button" type="button"> Ещё </button>
+        </section>
         <SideBar />
       </section>
       <Footer />

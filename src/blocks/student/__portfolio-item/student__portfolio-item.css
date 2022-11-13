@@ -1,18 +1,5 @@
-.student__portfolio-item {
-  text-decoration: none;
-  color: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: opacity 0.2s;
-}
-
 .student__portfolio-item:not(:last-of-type) {
   border-bottom: 1px #E8E8E8 solid;
   margin-bottom: 20px;
   padding-bottom: 20px;
-}
-
-.student__portfolio-item:hover {
-  opacity: 0.7;
 }

@@ -1,3 +1,4 @@
 .auth-form__input_invalid {
   color: #FF3055;
+  outline: 1px #FF3055 solid;
 }

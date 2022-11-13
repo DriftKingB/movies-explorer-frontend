@@ -20,20 +20,26 @@ export default function Student() {
       </div>
       <div className="student__portfolio">
         <p className="student__portfolio-subline"> Портфолио </p>
-        <nav className="student__portfolio-nav">
-          <a className="student__portfolio-item" href="https://driftkingb.github.io/how-to-learn/" target="blank">
-            <p className="student__portfolio-link"> Статичный сайт </p>
-            <div className="student__portfolio-item-icon"></div>
-          </a>
-          <a className="student__portfolio-item" href="https://driftkingb.github.io/russian-travel/index.html" target="blank">
-            <p className="student__portfolio-link"> Адаптивный сайт </p>
-            <div className="student__portfolio-item-icon"></div>
-          </a>
-          <a className="student__portfolio-item" href="https://github.com/DriftKingB/react-mesto-api-full" target="blank">
-            <p className="student__portfolio-link"> Одностраничное приложение </p>
-            <div className="student__portfolio-item-icon"></div>
-          </a>
-        </nav>
+        <ul className="student__portfolio-nav">
+          <li className='student__portfolio-item'>
+            <a className="student__portfolio-link" href="https://driftkingb.github.io/how-to-learn/" target="blank">
+              <p className="student__portfolio-link-text"> Статичный сайт </p>
+              <div className="student__portfolio-item-icon" />
+            </a>
+          </li>
+          <li className='student__portfolio-item'>
+            <a className="student__portfolio-link" href="https://driftkingb.github.io/russian-travel/index.html" target="blank">
+              <p className="student__portfolio-link-text"> Адаптивный сайт </p>
+              <div className="student__portfolio-item-icon" />
+            </a>
+          </li>
+          <li className='student__portfolio-item'>
+            <a className="student__portfolio-link" href="https://github.com/DriftKingB/react-mesto-api-full" target="blank">
+              <p className="student__portfolio-link-text"> Одностраничное приложение </p>
+              <div className="student__portfolio-item-icon" />
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
   )

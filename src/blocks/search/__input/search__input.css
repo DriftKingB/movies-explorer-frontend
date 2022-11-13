@@ -10,10 +10,11 @@
   padding-left: 22px;
   border-radius: 40px;
   user-select: none;
+  box-sizing: border-box;
 }
 
 .search__input:focus {
-  outline: none;
+  outline: 1px #3456F3 solid;
 }
 
 .search__input::placeholder {
