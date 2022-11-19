@@ -1,0 +1,23 @@
+.student__portfolio-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.student__portfolio-link:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 1280px) {
+  .student__portfolio-link {
+    font-size: calc((25vw + 1600px)/64); /* 768px: 28px */
+  }
+}
+
+@media (max-width: 768px) {
+  .student__portfolio-link {
+    font-size: calc((125vw + 608px)/56); /* 320px: 18px */
+  }
+}

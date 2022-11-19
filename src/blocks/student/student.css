@@ -1,0 +1,15 @@
+.student {
+  padding: 100px 70px 125px;
+}
+
+@media (max-width: 1280px) {
+  .student {
+    padding: calc((125vw + 1920px)/32) calc((125vw + 640px)/32) calc((875vw + 4800px)/128); /* 768px: 90px 50px 90px  */
+  }
+}
+
+@media (max-width: 768px) {
+  .student {
+    padding: calc((125vw + 1560px)/28) calc((225vw - 328px)/28); /* 320px: 70px 14px  */
+  }
+}

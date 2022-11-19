@@ -1,0 +1,15 @@
+.sidebar__nav {
+  padding: 160px 0 90px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .sidebar__nav {
+    padding: calc((25vw + 928px)/7) 0 calc((275vw + 408px)/28) ; /* 320px: 144px 0px 46px */
+  }
+}

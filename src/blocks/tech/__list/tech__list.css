@@ -1,0 +1,27 @@
+.tech__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .tech__list {
+    display: grid;
+    column-gap: 10px;
+    row-gap: 10px;
+    grid-template-columns: repeat(7, 84px);
+  }
+}
+
+@media (max-width: 756px) {
+  .tech__list {
+    grid-template-columns: repeat(4, 84px);
+  }
+}
+
+@media (max-width: 450px) {
+  .tech__list {
+    grid-template-columns: repeat(2, 84px);
+  }
+}

@@ -1,0 +1,14 @@
+.student__portfolio-item-icon {
+  width: 29px;
+  height: 60px;
+  background-image: url(../../../images/student__portfolio-item-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .student__portfolio-item-icon {
+    width: calc((225vw + 1296px)/112); /* 320px: 18px */
+    height: calc((50vw + 36px)/7); /* 320px: 28px */
+  }
+}

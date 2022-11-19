@@ -1,0 +1,17 @@
+.card__remove-button {
+  padding: 0;
+  border: 0;
+  width: 30px;
+  height: 30px;
+  background-position: center center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-image: url(../../../images/card__remove-button.svg);
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.card_saved:hover .card__remove-button {
+  opacity: 1;
+}

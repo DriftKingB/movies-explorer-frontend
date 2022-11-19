@@ -1,0 +1,6 @@
+.auth-form__input-label_invalid {
+  color: #FF3055;
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+}

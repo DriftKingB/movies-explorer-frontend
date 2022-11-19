@@ -1,0 +1,17 @@
+.about__visual-subtext {
+  margin: 0;
+  width: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #A0A0A0;
+  position: absolute;
+  bottom: -31px;
+}
+
+@media (max-width: 768px) {
+  .about__visual-subtext {
+    font-size: calc((75vw + 992px)/112); /* 320px: 11px */
+    bottom: calc((25vw + 242px)/-14); /* 320px: 23px */
+  }
+}

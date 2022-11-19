@@ -1,0 +1,19 @@
+.logo_location_form {
+  margin-bottom: 40px;
+  position: relative;
+  left: -179px;
+  top: 0;
+}
+
+@media (max-width: 768px) {
+  .logo_location_form {
+    left: calc(((425vw + 2280px)/14 - 38px)/-2);
+    margin-bottom: calc((-125vw + 3200px)/56); /* 320px: 50px */
+  }
+}
+
+@media (max-width: 450px) {
+  .logo_location_form {
+    left: 0;
+  }
+}

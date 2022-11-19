@@ -1,0 +1,37 @@
+.about__visual-item {
+  position: relative;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+}
+
+.about__visual-item:first-of-type {
+  width: 20%;
+  background-color: #2BE080;
+}
+
+.about__visual-item:last-of-type {
+  width: 80%;
+  background-color: #F2F2F2;
+}
+
+@media (max-width: 1280px) {
+  .about__visual-item:first-of-type {
+    width: calc((275vw + 128px)/16); /* 768px: 140px */
+  }
+
+  .about__visual-item:last-of-type {
+    width: calc(75vw - 48px); /* 768px: 528px */
+  }
+}
+
+@media (max-width: 768px) {
+  .about__visual-item:first-of-type {
+    width: calc((125vw + 1000px)/14); /* 320px: 100px */
+  }
+
+  .about__visual-item:last-of-type {
+    width: calc((1075vw - 864px)/14); /* 320px: 184px */
+  }
+}

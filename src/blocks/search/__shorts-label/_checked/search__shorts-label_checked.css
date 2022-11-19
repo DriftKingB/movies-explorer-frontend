@@ -1,0 +1,3 @@
+.search__shorts-label_checked::before {
+  background-image: url(../../../../images/search__shorts_checked.svg);
+}

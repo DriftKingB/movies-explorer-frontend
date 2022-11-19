@@ -1,0 +1,18 @@
+.auth {
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1280px) {
+  .auth {
+    padding: calc((-125vw + 1880px)/4) 0; /* 768px: 230px 0 */
+  }
+}
+
+@media (max-width: 768px) {
+  .auth {
+    padding: calc((2175vw - 3824px)/56) 0 calc((625vw - 1580px)/14) ; /* 320px: 56px 0px 30px  */
+  }
+}

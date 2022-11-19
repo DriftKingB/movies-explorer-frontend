@@ -1,0 +1,5 @@
+.search__shorts {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}

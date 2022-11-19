@@ -1,0 +1,22 @@
+.sidebar__nav-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.42;
+  transition: opacity 0.2s;
+}
+
+.sidebar__nav-link:hover {
+  opacity: 0.7;
+}
+
+.sidebar__nav-link:not(:last-of-type) {
+  margin-bottom: 28px;
+}
+
+@media (max-width: 768px) {
+  .sidebar__nav-link:not(:last-of-type) {
+    margin-bottom: calc((25vw + 592px)/28); /* 320px: 24px */
+  }
+}

@@ -1,0 +1,18 @@
+.notfound {
+  padding: 246px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1280px) {
+  .notfound {
+    padding: calc((-1025vw + 20992px)/32) 0 calc((-125vw + 1840px)/4) ; /* 768px: 410px 0px 220px  */
+  }
+}
+
+@media (max-width: 1280px) {
+  .notfound {
+    padding: calc((125vw + 1910px)/7) 0 calc((2375vw - 5920px)/56) ; /* 320px: 330px 0px 30px */
+  }
+}

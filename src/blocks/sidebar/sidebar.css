@@ -1,0 +1,19 @@
+.sidebar {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+  transition: visibility 0.2s, opacity 0.2s;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: block;
+  }
+}

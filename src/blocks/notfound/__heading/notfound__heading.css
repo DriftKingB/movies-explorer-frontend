@@ -1,0 +1,15 @@
+.notfound__heading {
+  margin: 0;
+  font-size: 140px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  .notfound__heading {
+    font-size: calc((375vw + 1040px)/28); /* 320px: 80px */
+    margin-bottom: calc((-125vw + 1520px)/112); /* 320px: 10px */
+  }
+}

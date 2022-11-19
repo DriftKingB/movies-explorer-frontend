@@ -1,0 +1,19 @@
+.student__info-link {
+  margin: 0;
+  align-self: flex-start;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.21;
+}
+
+.student__info-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .student__info-link {
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,22 @@
+.student__title {
+  margin: 0;
+  width: 100%;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.21;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 1280px) {
+  .student__title {
+    font-size: calc((125vw + 1600px)/64); /* 768px: 40px */
+    margin-bottom: calc((25vw + 832px)/64); /* 768px: 16px */
+  }
+}
+
+@media (max-width: 768px) {
+  .student__title {
+    font-size: calc((125vw + 1280px)/56); /* 320px: 30px */
+    margin-bottom: calc((-25vw + 640px)/28); /* 320px: 20px */
+  }
+}

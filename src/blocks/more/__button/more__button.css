@@ -1,0 +1,20 @@
+.more__button {
+  padding: 0;
+  color: #000;
+  width: 320px;
+  height: 36px;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.42;
+  background-color: #F9F9F9;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .more__button {
+    width: calc((125vw + 1280px)/7); /* 320px: 240px */
+  }
+}

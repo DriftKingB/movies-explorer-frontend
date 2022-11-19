@@ -1,0 +1,7 @@
+.auth-form__field {
+  position: relative;
+}
+
+.auth-form__field:not(:last-of-type) {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,18 @@
+.sidebar__close-button {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  width: 17.7px;
+  height: 17.7px;
+  background-image: url(../../../images/sidebar__close-button.svg);
+  position: absolute;
+  top: 22.4px;
+  right: 22.4px;
+  z-index: 3;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.sidebar__close-button:hover {
+  opacity: 0.7;
+}

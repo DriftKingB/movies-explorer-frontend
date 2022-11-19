@@ -1,0 +1,21 @@
+.profile__handlers-link {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.21;
+  cursor: pointer;
+}
+
+.profile__handlers-link:hover {
+  text-decoration: underline;
+}
+
+.profile__handlers-link:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .profile__handlers-link {
+    font-size: calc((25vw + 1264px)/112); /* 320px: 12px */
+  }
+}

@@ -1,0 +1,5 @@
+.student__portfolio-item:not(:last-of-type) {
+  border-bottom: 1px #E8E8E8 solid;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
