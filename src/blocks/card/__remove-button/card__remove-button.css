@@ -12,6 +12,6 @@
   cursor: pointer;
 }
 
-.card_saved:hover .card__remove-button {
+.card:hover .card__remove-button {
   opacity: 1;
 }

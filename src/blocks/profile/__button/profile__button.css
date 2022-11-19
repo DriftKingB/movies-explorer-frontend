@@ -1,21 +1,24 @@
-.profile__handlers-link {
+.profile__button {
   margin: 0;
+  padding: 0;
+  border: none;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.21;
   cursor: pointer;
+  background-color: #fff;
 }
 
-.profile__handlers-link:hover {
+.profile__button:hover {
   text-decoration: underline;
 }
 
-.profile__handlers-link:not(:last-of-type) {
+.profile__button:not(:last-of-type) {
   margin-bottom: 16px;
 }
 
 @media (max-width: 768px) {
-  .profile__handlers-link {
+  .profile__button {
     font-size: calc((25vw + 1264px)/112); /* 320px: 12px */
   }
 }

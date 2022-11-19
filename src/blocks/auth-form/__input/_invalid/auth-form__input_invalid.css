@@ -2,3 +2,8 @@
   color: #FF3055;
   outline: 1px #FF3055 solid;
 }
+
+.auth-form__input_invalid:focus {
+  outline: 1px #3456F3 solid;
+  color: #000;
+}

@@ -2,56 +2,29 @@ import Album from '../Album'
 import Header from '../Header'
 import Search from '../Search'
 import Footer from '../Footer'
-import AlbumCard from '../AlbumCard'
 import { useEffect } from 'react'
 import SideBar from '../SideBar'
 
-export default function Saved({ title }) {
+export default function Saved({ title, cards, setCards, getSavedMovies, onCardRemove, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage }) {
   useEffect(() => {
     document.title = title;
+    getSavedMovies();
   }, [])
 
   return (
     <>
-      <Header />
+      <Header setSideBarState={setSideBarState} />
       <section className="main">
         <Search
-          shortsChecked={false}
+          setCards={setCards}
         />
         <Album
-          cards={
-            <>
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isSaved={true}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isLiked={true}
-                isSaved={true}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isSaved={true}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isLiked={true}
-                isSaved={true}
-              />
-            </>
-          }
+          cards={cards}
+          isLoading={albumIsLoading}
+          onCardRemove={onCardRemove}
+          responseMessage={responseMessage}
         />
-        <section className="more" />
-        <SideBar />
+        <SideBar isOpen={ sideBarIsOpen } setSideBarState={ setSideBarState } />
       </section>
       <Footer />
     </>

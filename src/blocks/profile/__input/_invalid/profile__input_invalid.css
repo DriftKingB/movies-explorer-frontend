@@ -1,0 +1,8 @@
+.profile__input_invalid {
+  color: #FF3055;
+  border: 1px #FF3055 solid;
+}
+
+.profile__input_invalid:focus {
+  color: #000;
+}

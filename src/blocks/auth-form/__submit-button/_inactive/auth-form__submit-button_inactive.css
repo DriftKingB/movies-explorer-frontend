@@ -1,0 +1,9 @@
+.auth-form__submit-button_inactive {
+  background-color: #F9F9F9;
+  color: #000;
+  cursor: default;
+}
+
+.auth-form__submit-button_inactive:hover {
+  transform: none;
+}

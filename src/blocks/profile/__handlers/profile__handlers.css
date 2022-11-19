@@ -1,5 +1,9 @@
 .profile__handlers {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: none;
+  position: relative;
 }
