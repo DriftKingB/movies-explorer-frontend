@@ -23,26 +23,30 @@ import useMoviesFilter from "../hooks/useMoviesFilter";
 import { customErrors, moviesBaseUrl } from "../utils/constants";
 
 export default function App() {
-  const { signin, setUser, signout } = useContext(AuthContext);
+  const {
+    setUser, signin, signout,
+    savedMovies, searchState, tokenIsPresent, updateSearchState, updateSavedMovies,
+  } = useContext(AuthContext);
   const [ cards, setCards ] = useState(null);
-
-  const savedMovies = JSON.parse(localStorage.getItem('saved-movies')) ?? [];
-  const searchedMovies = JSON.parse(localStorage.getItem('searchState'))?.movies ?? [];
 
   const [ responseMessage, setResponseMessage ] = useState(null);
   const [ sideBarIsOpen, setSideBarState ] = useState(false);
   const [ albumIsLoading, setAlbumState ] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (token) {
+    if (tokenIsPresent) {
       getUserInfo();
+      getSavedMovies();
     }
-  }, []);
+  }, [tokenIsPresent]);
 
   function handleSignout(redirectFunc) {
-    signout(redirectFunc);
+    auth.logout()
+      .then(() => {
+        signout();
+        redirectFunc();
+      })
+      .catch(setResponseMessage);
   }
 
   function handleProfileSubmit(inputs, loadingFunc) {
@@ -60,9 +64,9 @@ export default function App() {
 
     loadingFunc(true);
     auth.register(name.value, email.value, password.value)
-      .then(({ data }) => {
-        signin(data, redirectFunc);
-        getUserInfo();
+      .then(() => {
+        signin();
+        redirectFunc();
       })
       .catch(setResponseMessage)
       .finally(() => loadingFunc(false));
@@ -73,9 +77,9 @@ export default function App() {
 
     loadingFunc(true);
     auth.login(email.value, password.value)
-      .then(({ data }) => {
-        signin(data, redirectFunc);
-        getUserInfo();
+      .then(() => {
+        signin();
+        redirectFunc();
       })
       .catch(setResponseMessage)
       .finally(() => loadingFunc(false));
@@ -86,7 +90,7 @@ export default function App() {
     moviesApi.getMovies()
       .then(movies => useMoviesFilter({ movies, keyWord, shortsChecked }))
       .then(movies => {
-        localStorage.setItem('searchState', JSON.stringify({ keyWord, shortsChecked, movies }));
+        updateSearchState({ movies, keyWord, shortsChecked })
 
         if (movies.length === 0) {
           setResponseMessage(customErrors.movieNotFound);
@@ -94,7 +98,7 @@ export default function App() {
         }
 
         const moviesToRender = movies.map(searched => {
-          if (savedMovies.some(saved => saved.movieId === searched.id)) {
+          if (savedMovies.some(saved => saved.id === searched.id)) {
             searched.isLiked = true;
           }
           return searched
@@ -115,21 +119,31 @@ export default function App() {
   function getSavedMovies() {
     api.getMovies()
       .then(({ data }) => {
+        updateSavedMovies(data);
+      })
+      .catch(setResponseMessage);
+  }
+
+  function renderSavedMovies() {
+    api.getMovies()
+      .then(({ data }) => {
         setCards(data);
-        localStorage.setItem('saved-movies', JSON.stringify(data));
+        updateSavedMovies(data);
       })
       .catch(setResponseMessage);
   }
 
   function getMovies() {
-    if (searchedMovies.length === 0) {
+    console.log(searchState)
+    if (!searchState?.movies || searchState?.movies?.length === 0) {
+      setCards([]);
       return
     }
 
     api.getMovies()
       .then(({ data }) => {
-        const moviesToRender = searchedMovies.map(searched => {
-          if (data.some(saved => saved.movieId === searched.id)) {
+        const moviesToRender = searchState.movies?.map(searched => {
+          if (data.some(saved => saved.id === searched.id)) {
             searched.isLiked = true;
           }
           return searched
@@ -145,27 +159,30 @@ export default function App() {
     const imageLink = `${moviesBaseUrl}${movie.image.url}`;
     const thumbnailLink = `${moviesBaseUrl}${movie.image.formats.thumbnail.url}`;
 
-    api.saveMovie({ movieId: movie.id, country, director, duration, year, description, trailerLink, image: imageLink, thumbnail: thumbnailLink, nameRU, nameEN  })
-      .catch(console.log);
-  }
-
-  function handleCardDislike(movie) {
-    api.removeMovie(movie.id ?? movie.movieId)
-      .catch(console.log);
-  }
-
-  function handleCardRemove(movie) {
-    api.removeMovie(movie.movieId)
+    api.saveMovie({ id: movie.id, country, director, duration, year, description, trailerLink, image: imageLink, thumbnail: thumbnailLink, nameRU, nameEN  })
       .then(({ data }) => {
-        const moviesToRender = cards.slice();
+        const moviesToRender = [ ...savedMovies, data ];
+
+        updateSavedMovies(moviesToRender);
+      })
+      .catch(console.log);
+  }
+
+  function handleCardDislike(movie, removeCardFromList = false) {
+    api.removeMovie(movie.id)
+      .then(({ data }) => {
+        const moviesToRender = savedMovies.slice();
 
         moviesToRender.forEach((movie, index)  => {
-          if (movie.movieId === data.movieId) {
+          if (movie.id === data.id) {
             moviesToRender.splice(index, 1);
           }
         });
 
-        setCards(moviesToRender);
+        updateSavedMovies(moviesToRender);
+        if (removeCardFromList) {
+          setCards(moviesToRender);
+        }
       })
       .catch(console.log);
   }
@@ -202,8 +219,8 @@ export default function App() {
             title="ME | Сохранённые фильмы"
             cards={cards}
             setCards={setCards}
-            getSavedMovies={getSavedMovies}
-            onCardRemove={handleCardRemove}
+            renderSavedMovies={renderSavedMovies}
+            onCardDislike={handleCardDislike}
             sideBarIsOpen={sideBarIsOpen}
             setSideBarState={setSideBarState}
             albumIsLoading={albumIsLoading}

@@ -7,13 +7,12 @@ export default function Register({ title, onSignup, responseMessage, setResponse
   const navigate = useNavigate();
   const location = useLocation();
 
-  const defaultInputs = {
-    name: {isValid: true},
-    email: {isValid: true},
-    password: {isValid: true},
-  };
+  const validationConfig = {
+    defaultInputs: { name: {}, email: {}, password: {} },
+    defaultIsValidState: false,
+  }
   const [ isLoading, setIsLoading ] = useState(false);
-  const { inputs, isValid, handleInputsUpdate, handleChange } = useInputsValidation(defaultInputs);
+  const { inputs, isValid, handleInputsUpdate, handleChange } = useInputsValidation(validationConfig);
 
   useEffect(() => {
     document.title = title;
@@ -29,6 +28,7 @@ export default function Register({ title, onSignup, responseMessage, setResponse
 
   function handleSignup(evt) {
     evt.preventDefault();
+    setResponseMessage('');
     onSignup(inputs, setIsLoading, redirectToFromPage)
   }
 
@@ -43,7 +43,7 @@ export default function Register({ title, onSignup, responseMessage, setResponse
               <div className="auth-form__field">
                 <label className="auth-form__input-label"> Имя </label>
                 <input
-                  className={`auth-form__input ${!inputs.name?.isValid? 'auth-form__input_invalid' : ''}`}
+                  className={`auth-form__input ${!(inputs.name?.isValid ?? true) ? 'auth-form__input_invalid' : ''}`}
                   type="text"
                   required
                   minLength="2"
@@ -51,6 +51,7 @@ export default function Register({ title, onSignup, responseMessage, setResponse
                   pattern="^[A-Za-zА-Яа-яЁё -]+"
                   name="name"
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
                 <label className="auth-form__input-label auth-form__input-label_invalid">
                   { inputs.name?.errorMessage }
@@ -59,11 +60,12 @@ export default function Register({ title, onSignup, responseMessage, setResponse
               <div className="auth-form__field">
                 <label className="auth-form__input-label"> E-mail </label>
                 <input
-                  className={`auth-form__input ${!inputs.email?.isValid? 'auth-form__input_invalid' : ''}`}
+                  className={`auth-form__input ${!(inputs.email?.isValid ?? true) ? 'auth-form__input_invalid' : ''}`}
                   type="email"
                   required
                   name="email"
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
                 <label className="auth-form__input-label auth-form__input-label_invalid">
                   { inputs.email?.errorMessage }
@@ -72,12 +74,13 @@ export default function Register({ title, onSignup, responseMessage, setResponse
               <div className="auth-form__field">
                 <label className="auth-form__input-label"> Пароль </label>
                 <input
-                  className={`auth-form__input ${!inputs.password?.isValid ? 'auth-form__input_invalid' : ''}`}
+                  className={`auth-form__input ${!(inputs.password?.isValid ?? true) ? 'auth-form__input_invalid' : ''}`}
                   type="password"
                   required
                   minLength="3"
                   name="password"
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
                 <label className="auth-form__input-label auth-form__input-label_invalid">
                   { inputs.password?.errorMessage }

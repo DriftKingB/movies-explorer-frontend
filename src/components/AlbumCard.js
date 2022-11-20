@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { moviesBaseUrl } from "../utils/constants";
 
-export default function AlbumCard({ card, onMainPage, onLike, onDislike, onRemove }) {
+export default function AlbumCard({ card, onMainPage, onLike, onDislike }) {
   const [ isLiked, setIsLiked ] = useState(card.isLiked);
   const imageLink =  onMainPage ? (card.image?.url && `${moviesBaseUrl}${card.image?.url}`) : card.image;
   const drt = card.duration;
@@ -21,11 +21,11 @@ export default function AlbumCard({ card, onMainPage, onLike, onDislike, onRemov
     }
   }
   function handleRemoveButtonClick() {
-    onRemove(card);
+    onDislike(card, true);
   }
 
   return (
-    <li className={`card ${isLiked ? 'card_saved' : ''}`} id={card.id}>
+    <li className="card" id={card.id}>
       <a href={card.trailerLink} target="blank" className="card__image-link">
         <div className="card__image-container">
           <img className="card__image" src={ imageLink } alt={ card.nameRU } />

@@ -80,8 +80,8 @@
 @import url(./blocks/search/__shorts-label/search__shorts-label.css);
 @import url(./blocks/search/__shorts-label/_checked/search__shorts-label_checked.css);
 @import url(./blocks/search/__submit-button/search__submit-button.css);
-@import url(./blocks/search/__reset-button/search__reset-button.css);
-@import url(./blocks/search/__reset-button/_active/search__reset-button_active.css);
+@import url(./blocks/search/__reset-buttton/search__reset-button.css);
+@import url(./blocks/search/__reset-buttton/_active/search__reset-button_active.css);
 @import url(./blocks/search/__validation-error/search__validation-error.css);
 @import url(./blocks/search/__validation-error/_active/search__validation-error_active.css);
 

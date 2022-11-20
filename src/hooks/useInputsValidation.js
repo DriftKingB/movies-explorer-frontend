@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
-import useCustomValidatioErrors from "./useCustomValidationErrors";
+import useCustomValidationErrors from "./useCustomValidationErrors";
 
-export default function useInputsValidation(defaultInputs = {}) {
+export default function useInputsValidation({ defaultInputs, defaultIsValidState }) {
   const [ inputs, setInputs ] = useState(defaultInputs);
-  const [ isValid, setIsValid ] = useState(false);
+  const [ isValid, setIsValid ] = useState(defaultIsValidState);
 
   useEffect(() => {
-    const someInputIsInvalid = Object.values(inputs).some(input => !(input?.isValid));
+    const someInputIsInvalid = Object.values(inputs).some(input => !(input?.isValid ?? defaultIsValidState));
+    const inputsDidntChange = Object.values(inputs).every(input => {
+      return Object.values(defaultInputs).some(defaultInput => {
+        return defaultInput.value === input.value;
+      });
+    });
 
-    !someInputIsInvalid ? setIsValid(true) : setIsValid(false);
+    (someInputIsInvalid || inputsDidntChange) ? setIsValid(false) : setIsValid(true);
   }, [inputs]);
 
   function handleInputsUpdate() {
@@ -19,7 +24,7 @@ export default function useInputsValidation(defaultInputs = {}) {
     const input = evt.target;
     const value = input.value;
     const isValid = input.validity.valid;
-    const errorMessage = useCustomValidatioErrors(input.validity) ?? input.validationMessage;
+    const errorMessage = useCustomValidationErrors(input.validity) ?? input.validationMessage;
 
     setInputs({ ...inputs, [input.name]: { value, isValid, errorMessage } });
   }

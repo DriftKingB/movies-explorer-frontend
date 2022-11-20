@@ -9,17 +9,15 @@ class Api {
   _checkResponse(res) {
     return res.json()
       .then(data => {
-        return (res.ok) ? Promise.resolve(data) : Promise.reject(`Ошибка ${res.status} - ${data.message}`);
+        return (res.ok) ? Promise.resolve(data) : Promise.reject(`Ошибка: ${data.message.toLowerCase()}`);
       });
   }
 
   getMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        ...this._headers,
-      },
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }
@@ -27,22 +25,18 @@ class Api {
   saveMovie(movie) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        ...this._headers,
-      },
+      headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify(movie),
     })
       .then(this._checkResponse);
   }
 
-  removeMovie(movieId) {
-    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+  removeMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
       method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        ...this._headers,
-      },
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }
@@ -50,10 +44,8 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        ...this._headers,
-      },
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }
@@ -61,10 +53,8 @@ class Api {
   updateUserInfo(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        ...this._headers,
-      },
+      headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({ name, email }),
     })
       .then(this._checkResponse);

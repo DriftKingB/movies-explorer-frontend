@@ -5,10 +5,10 @@ import Footer from '../Footer'
 import { useEffect } from 'react'
 import SideBar from '../SideBar'
 
-export default function Saved({ title, cards, setCards, getSavedMovies, onCardRemove, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage }) {
+export default function Saved({ title, cards, setCards, renderSavedMovies, onCardDislike, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage }) {
   useEffect(() => {
     document.title = title;
-    getSavedMovies();
+    renderSavedMovies();
   }, [])
 
   return (
@@ -16,12 +16,13 @@ export default function Saved({ title, cards, setCards, getSavedMovies, onCardRe
       <Header setSideBarState={setSideBarState} />
       <section className="main">
         <Search
+          cards={cards}
           setCards={setCards}
         />
         <Album
           cards={cards}
           isLoading={albumIsLoading}
-          onCardRemove={onCardRemove}
+          onCardDislike={onCardDislike}
           responseMessage={responseMessage}
         />
         <SideBar isOpen={ sideBarIsOpen } setSideBarState={ setSideBarState } />

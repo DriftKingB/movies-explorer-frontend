@@ -42,7 +42,7 @@ export default function NavBar({ dark, tokenIsPresent, setSideBarState }) {
           </> :
           <>
             <Link to="/profile" className="navbar__link navbar__link_type_account-info"> Аккаунт </Link>
-            <button className={`navbar__menu-button navbar__menu-button_dark`} type="button" onClick={ handleMenuButtonClick } />
+            <button className={`navbar__menu-button ${dark ? 'navbar__menu-button_dark' : ''}`} type="button" onClick={ handleMenuButtonClick } />
           </>
         }
       </div>

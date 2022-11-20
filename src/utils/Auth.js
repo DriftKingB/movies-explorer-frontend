@@ -9,7 +9,7 @@ class Auth {
   _checkResponse(res) {
     return res.json()
       .then(data => {
-        return (res.ok) ? Promise.resolve(data) : Promise.reject(`Ошибка ${res.status} - ${data.message}`);
+        return (res.ok) ? Promise.resolve(data) : Promise.reject(`Ошибка: ${data.message.toLowerCase()}`);
       });
   }
 
@@ -17,6 +17,7 @@ class Auth {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({ name, email, password }),
     })
       .then(this._checkResponse);
@@ -26,7 +27,17 @@ class Auth {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
+    })
+      .then(this._checkResponse);
+  }
+
+  logout() {
+    return fetch(`${this._baseUrl}/signout`, {
+      method: 'POST',
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }

@@ -7,18 +7,17 @@ export default function Login({ title, onSignin, responseMessage, setResponseMes
   const location = useLocation();
   const navigate = useNavigate();
 
-  const defaultInputs = {
-    email: {isValid: true},
-    password: {isValid: true},
-  };
-  const { inputs, isValid, handleInputsUpdate, handleChange } = useInputsValidation(defaultInputs);
+  const validationConfig = {
+    defaultInputs: { email: {}, password: {} },
+    defaultIsValidState: false,
+  }
+  const { inputs, isValid,  handleChange } = useInputsValidation(validationConfig);
   const [ isLoading, setIsLoading ] = useState(false);
 
   useEffect(() => {
     document.title = title;
-    handleInputsUpdate();
     setResponseMessage('');
-  }, [location])
+  }, [])
 
   function redirectToFromPage() {
     const fromPage = location.state?.from?.pathname || "/movies";
@@ -28,6 +27,7 @@ export default function Login({ title, onSignin, responseMessage, setResponseMes
 
   function handleSignin(evt) {
     evt.preventDefault();
+    setResponseMessage('');
     onSignin(inputs, setIsLoading, redirectToFromPage);
   }
 
@@ -42,11 +42,12 @@ export default function Login({ title, onSignin, responseMessage, setResponseMes
               <div className="auth-form__field">
                 <label className="auth-form__input-label"> E-mail </label>
                 <input
-                  className={`auth-form__input ${!inputs.email?.isValid? 'auth-form__input_invalid' : ''}`}
+                  className={`auth-form__input ${!(inputs.email?.isValid ?? true) ? 'auth-form__input_invalid' : ''}`}
                   type="email"
                   required
                   name="email"
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
                 <label className="auth-form__input-label auth-form__input-label_invalid">
                   { inputs.email?.errorMessage }
@@ -55,12 +56,13 @@ export default function Login({ title, onSignin, responseMessage, setResponseMes
               <div className="auth-form__field">
                 <label className="auth-form__input-label"> Пароль </label>
                 <input
-                  className={`auth-form__input ${!inputs.password?.isValid? 'auth-form__input_invalid' : ''}`}
+                  className={`auth-form__input ${!(inputs.password?.isValid ?? true) ? 'auth-form__input_invalid' : ''}`}
                   type="password"
                   required
                   minLength="3"
                   name="password"
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
                 <label className="auth-form__input-label auth-form__input-label_invalid">
                   { inputs.password?.errorMessage }

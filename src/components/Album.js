@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import AlbumCard from "./AlbumCard";
 import Preloader from "./Preloader";
 
-export default function Album({ cards, isLoading, onCardLike, onCardDislike, onCardRemove, responseMessage, maxCardsNumber, moreButtonIsActive, handleMoreButtonClick }) {
+export default function Album({ cards, isLoading, onCardLike, onCardDislike, responseMessage, maxCardsNumber, moreButtonIsActive, handleMoreButtonClick }) {
   const location = useLocation();
   const onMainPage = location.pathname === '/movies';
 
@@ -21,12 +21,11 @@ export default function Album({ cards, isLoading, onCardLike, onCardDislike, onC
                   {
                     cards?.slice(0, (onMainPage ? maxCardsNumber : 100)).map(card =>
                       <AlbumCard
-                        key={card?.id ?? card?.movieId}
+                        key={card?.id}
                         card={card}
                         onMainPage={onMainPage}
                         onLike={onCardLike}
                         onDislike={onCardDislike}
-                        onRemove={onCardRemove}
                       />)
                   }
                 </ul>

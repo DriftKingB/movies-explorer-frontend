@@ -6,6 +6,7 @@
   color: #3456F3;
   cursor: pointer;
   border: none;
+  background-color: transparent;
 }
 
 .notfound__link:hover {

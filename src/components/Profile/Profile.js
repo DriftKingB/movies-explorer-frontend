@@ -1,26 +1,27 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../hoc/AuthProvider";
 import useInputsValidation from "../../hooks/useInputsValidation";
 import Header from "../Header";
 
 export default function Profile({ title, onEdit, onSignout, responseMessage, setResponseMessage }) {
-  const { user } = useAuth();
-  const location = useLocation();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [ isForm, setIsForm ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
-  const defaultInputs = {
-    name: { value: user?.name, isValid: true },
-    email: { value: user?.email, isValid: true }
+
+  const validationConfig = {
+    defaultInputs: {
+      name: { value: user?.name, isValid: true },
+      email: { value: user?.email, isValid: true }
+    },
   };
-  const { inputs, isValid, setIsValid, handleInputsUpdate, handleChange } = useInputsValidation(defaultInputs);
+  const { inputs, isValid, setIsValid, handleInputsUpdate, handleChange } = useInputsValidation(validationConfig);
 
   useEffect(() => {
     document.title = title;
-    handleFormRender();
-  }, [location])
+  }, [])
 
   useEffect(() => {
     handleFormRender();
@@ -38,7 +39,7 @@ export default function Profile({ title, onEdit, onSignout, responseMessage, set
   }
 
   function handleSignout() {
-    onSignout(() => navigate('/signin', { replace: true }));
+    onSignout(() => navigate('/', { replace: true }));
   }
 
   function handleUserUpdate(evt) {

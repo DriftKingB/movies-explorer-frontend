@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom"
+import { AuthContext } from "./AuthProvider";
 
 export default function ProtectedRoute({ component: Component, ...props }) {
   const location = useLocation();
-  const token = localStorage.getItem('token');
+  const { tokenIsPresent } = useContext(AuthContext);
 
-  return token ? <Component {...props} /> : <Navigate to="/signin" replace state={{from: location}} />
+  return tokenIsPresent ? <Component {...props} /> : <Navigate to="/signin" replace state={{from: location}} />
 }

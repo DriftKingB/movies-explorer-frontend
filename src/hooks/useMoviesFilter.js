@@ -1,4 +1,4 @@
-export default function useMoviesFilter({ movies, keyWord = '', shortsChecked }) {
+export default function useMoviesFilter({ movies = [], keyWord = '', shortsChecked = 'unsettled' }) {
   let filteredMovies = [];
 
   movies.forEach(movie => {

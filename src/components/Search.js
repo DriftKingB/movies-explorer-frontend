@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { AuthContext } from "../hoc/AuthProvider";
 import useInputsValues from "../hooks/useInputsValues";
 import useMoviesFilter from "../hooks/useMoviesFilter";
 
 export default function Search({ onSearch, setCards }) {
   const location = useLocation();
   const onMainPage = location.pathname === '/movies';
-  const savedMovies = JSON.parse(localStorage.getItem('saved-movies')) ?? [];
-  const searchState = JSON.parse(onMainPage && localStorage.getItem('searchState')) ?? {};
 
-  const { inputs, handleChange, handleInputsUpdate } = useInputsValues({ title: searchState?.keyWord ?? '' });
+  const { searchState, savedMovies } = useContext(AuthContext);
+
+  const { inputs, handleChange, handleInputsUpdate } = useInputsValues({ title: onMainPage ? searchState?.keyWord : ''});
   const [ isValid, setIsValid ] = useState(true);
-  const [ shortsChecked, setShortsState ] = useState(onMainPage ? searchState?.shortsChecked : "unsettled");
+  const [ shortsChecked, setShortsState ] = useState(onMainPage ? searchState?.shortsChecked : 'unsettled');
   const [ resetIsActive, setResetState ] = useState(false);
 
   useEffect(() => {
     !onMainPage && setCards(useMoviesFilter({ movies: savedMovies, keyWord: inputs.title, shortsChecked }));
-    console.log(shortsChecked)
   }, [inputs, shortsChecked])
-
 
   function handleSearch(evt) {
     evt.preventDefault();
@@ -58,7 +57,7 @@ export default function Search({ onSearch, setCards }) {
             required
             placeholder="Фильм"
             onChange={handleInputChange}
-            defaultValue={searchState?.keyWord ?? ''}
+            defaultValue={inputs?.title}
           />
           { onMainPage ?
             <button className="search__submit-button" type="submit" onClick={handleSearch}> Найти </button> :
