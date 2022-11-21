@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../hoc/AuthProvider";
 import useInputsValidation from "../../hooks/useInputsValidation";
 import Header from "../Header";
+import ResponsePopup from "../ResponsePopup";
 
-export default function Profile({ title, onEdit, onSignout, responseMessage, setResponseMessage }) {
+export default function Profile({ title, onEdit, onSignout, responseMessage, setResponseMessage, popupMessage }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -69,7 +70,7 @@ export default function Profile({ title, onEdit, onSignout, responseMessage, set
                   name="name"
                   defaultValue={inputs.name?.value}
                   onChange={handleChange}
-                  disabled={!isForm}
+                  disabled={!isForm || isLoading}
                   /> :
                   <p className="profile__info-text"> { user?.name } </p>
               }
@@ -85,7 +86,7 @@ export default function Profile({ title, onEdit, onSignout, responseMessage, set
                   name="email"
                   defaultValue={inputs.email?.value}
                   onChange={handleChange}
-                  disabled={!isForm}
+                  disabled={!isForm || isLoading}
                   /> :
                   <p className="profile__info-text"> { user?.email } </p>
               }
@@ -125,6 +126,7 @@ export default function Profile({ title, onEdit, onSignout, responseMessage, set
           </fieldset>
         </form>
       </section>
+      <ResponsePopup message={popupMessage} />
     </>
   )
 }

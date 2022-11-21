@@ -9,7 +9,7 @@ class Auth {
   _checkResponse(res) {
     return res.json()
       .then(data => {
-        return (res.ok) ? Promise.resolve(data) : Promise.reject(`Ошибка: ${data.message.toLowerCase()}`);
+        return (res.ok) ? Promise.resolve(data) : Promise.reject({ data, res });
       });
   }
 

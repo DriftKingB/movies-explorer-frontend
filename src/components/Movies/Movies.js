@@ -5,8 +5,9 @@ import Search from "../Search";
 import { useEffect } from "react";
 import SideBar from "../SideBar";
 import useCardsRender from "../../hooks/useCardsRender";
+import ResponsePopup from "../ResponsePopup";
 
-export default function Movies({ title, cards, getMovies, onSearch, onCardLike, onCardDislike, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage }) {
+export default function Movies({ title, cards, getMovies, onSearch, onCardLike, onCardDislike, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage, popupMessage }) {
   const { maxCardsNumber, moreButtonIsActive, handleMoreButtonClick } = useCardsRender(cards);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function Movies({ title, cards, getMovies, onSearch, onCardLike, 
         />
         <SideBar isOpen={ sideBarIsOpen } setSideBarState={ setSideBarState } />
       </section>
+      <ResponsePopup message={popupMessage}/>
       <Footer />
     </>
   )

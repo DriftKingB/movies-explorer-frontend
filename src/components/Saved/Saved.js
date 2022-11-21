@@ -4,11 +4,12 @@ import Search from '../Search'
 import Footer from '../Footer'
 import { useEffect } from 'react'
 import SideBar from '../SideBar'
+import ResponsePopup from '../ResponsePopup'
 
-export default function Saved({ title, cards, setCards, renderSavedMovies, onCardDislike, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage }) {
+export default function Saved({ title, cards, getSavedMovies, onCardDislike, onSearch, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage, popupMessage }) {
   useEffect(() => {
     document.title = title;
-    renderSavedMovies();
+    getSavedMovies({ render: true });
   }, [])
 
   return (
@@ -17,7 +18,7 @@ export default function Saved({ title, cards, setCards, renderSavedMovies, onCar
       <section className="main">
         <Search
           cards={cards}
-          setCards={setCards}
+          onSearch={onSearch}
         />
         <Album
           cards={cards}
@@ -26,6 +27,7 @@ export default function Saved({ title, cards, setCards, renderSavedMovies, onCar
           responseMessage={responseMessage}
         />
         <SideBar isOpen={ sideBarIsOpen } setSideBarState={ setSideBarState } />
+        <ResponsePopup message={popupMessage} />
       </section>
       <Footer />
     </>

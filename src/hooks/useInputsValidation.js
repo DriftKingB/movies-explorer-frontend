@@ -24,7 +24,7 @@ export default function useInputsValidation({ defaultInputs, defaultIsValidState
     const input = evt.target;
     const value = input.value;
     const isValid = input.validity.valid;
-    const errorMessage = useCustomValidationErrors(input.validity) ?? input.validationMessage;
+    const errorMessage = useCustomValidationErrors(input) ?? input.validationMessage;
 
     setInputs({ ...inputs, [input.name]: { value, isValid, errorMessage } });
   }

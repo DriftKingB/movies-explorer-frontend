@@ -9,7 +9,7 @@ class MoviesApi {
   _checkResponse(res) {
     return res.json()
       .then(data => {
-        return (res.ok) ? Promise.resolve(data) : Promise.reject(customErrors.moviesApiError);
+        return (res.ok) ? Promise.resolve(data) : Promise.reject({ data: customErrors.moviesApiError });
       });
   }
 

@@ -8,20 +8,18 @@ export default function AlbumCard({ card, onMainPage, onLike, onDislike }) {
   const duration = (drt < 60 && `${drt} м`) || (drt === 60 && `1 ч`) || (drt > 60 && `${Math.floor(drt/60)} ч ${drt % 60} м`);
 
   useEffect(() => {
-    card.isLiked && setIsLiked(true);
-  }, [card])
+    setIsLiked(card.isLiked);
+  }, [card.isLiked])
 
   function handleLikeButtonClick() {
     if (isLiked) {
-      onDislike(card);
-      setIsLiked(false);
+      onDislike({ movie: card, likeFunc: setIsLiked});
     } else {
-      onLike(card);
-      setIsLiked(true);
+      onLike(card, setIsLiked);
     }
   }
   function handleRemoveButtonClick() {
-    onDislike(card, true);
+    onDislike({ movie: card, render: true });
   }
 
   return (

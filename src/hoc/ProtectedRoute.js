@@ -6,5 +6,5 @@ export default function ProtectedRoute({ component: Component, ...props }) {
   const location = useLocation();
   const { tokenIsPresent } = useContext(AuthContext);
 
-  return tokenIsPresent ? <Component {...props} /> : <Navigate to="/signin" replace state={{from: location}} />
+  return tokenIsPresent ? <Component {...props} /> : <Navigate to="/" replace state={{from: location}} />
 }

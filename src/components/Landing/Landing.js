@@ -6,8 +6,9 @@ import Student from "./Student";
 import Tech from "./Tech";
 import SideBar from "../SideBar";
 import { useEffect } from "react";
+import ResponsePopup from "../ResponsePopup";
 
-export default function Landing({ title, sideBarIsOpen, setSideBarState }) {
+export default function Landing({ title, sideBarIsOpen, setSideBarState, popupMessage }) {
   useEffect(() => {
     document.title = title;
   }, [])
@@ -25,6 +26,7 @@ export default function Landing({ title, sideBarIsOpen, setSideBarState }) {
         <Student />
         <SideBar isOpen={ sideBarIsOpen } setSideBarState={ setSideBarState } />
       </section>
+      <ResponsePopup message={popupMessage} />
       <Footer />
     </>
   )

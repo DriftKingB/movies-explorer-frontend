@@ -1,11 +1,13 @@
 import AuthForm from "../AuthForm"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import useInputsValidation from "../../hooks/useInputsValidation";
+import { AuthContext } from "../../hoc/AuthProvider";
 
 export default function Login({ title, onSignin, responseMessage, setResponseMessage }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { tokenIsPresent } = useContext(AuthContext);
 
   const validationConfig = {
     defaultInputs: { email: {}, password: {} },
@@ -17,7 +19,8 @@ export default function Login({ title, onSignin, responseMessage, setResponseMes
   useEffect(() => {
     document.title = title;
     setResponseMessage('');
-  }, [])
+    tokenIsPresent && navigate(-1);
+  }, [location])
 
   function redirectToFromPage() {
     const fromPage = location.state?.from?.pathname || "/movies";
@@ -32,6 +35,7 @@ export default function Login({ title, onSignin, responseMessage, setResponseMes
   }
 
   return (
+    !tokenIsPresent &&
     <section className="main">
       <section className="auth">
         <Link to="/" className="logo logo_location_form" />

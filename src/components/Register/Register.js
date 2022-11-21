@@ -1,11 +1,13 @@
 import AuthForm from "../AuthForm";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useInputsValidation from "../../hooks/useInputsValidation";
+import { AuthContext } from "../../hoc/AuthProvider";
 
 export default function Register({ title, onSignup, responseMessage, setResponseMessage }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { tokenIsPresent } = useContext(AuthContext);
 
   const validationConfig = {
     defaultInputs: { name: {}, email: {}, password: {} },
@@ -18,6 +20,7 @@ export default function Register({ title, onSignup, responseMessage, setResponse
     document.title = title;
     handleInputsUpdate();
     setResponseMessage('');
+    tokenIsPresent && navigate(-1);
   }, [location])
 
   function redirectToFromPage() {
@@ -33,6 +36,7 @@ export default function Register({ title, onSignup, responseMessage, setResponse
   }
 
   return (
+    !tokenIsPresent &&
     <section className="main">
       <section className="auth">
         <Link to="/" className="logo logo_location_form" />
@@ -63,6 +67,7 @@ export default function Register({ title, onSignup, responseMessage, setResponse
                   className={`auth-form__input ${!(inputs.email?.isValid ?? true) ? 'auth-form__input_invalid' : ''}`}
                   type="email"
                   required
+                  pattern="\S+@\S+\.\S+"
                   name="email"
                   onChange={handleChange}
                   disabled={isLoading}

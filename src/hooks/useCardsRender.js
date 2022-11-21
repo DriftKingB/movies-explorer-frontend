@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
+import { cardsRenderConfig } from "../utils/constants";
 import useWindowDimensions from "./useWindowDimensions"
 
 export default function useCardsRender(cards) {
   const { windowWidth } = useWindowDimensions();
   const [ maxCardsNumber, setMaxCardsNumber ] = useState(0);
   const [ moreButtonIsActive, setMoreButtonState ] = useState(false);
+  const { windowMin, windowMedium, windowMax } = cardsRenderConfig;
 
   useEffect(() => {
-    if (windowWidth > 1058) {
-      (maxCardsNumber <= 12) && setMaxCardsNumber(12)
-    } else if (windowWidth <= 1058 && windowWidth >= 622) {
-      (maxCardsNumber <= 8) && setMaxCardsNumber(8)
-    } else if (windowWidth < 622) {
-      (maxCardsNumber <= 5) && setMaxCardsNumber(5)
+    if (windowWidth > windowMedium.width) {
+
+      (maxCardsNumber <= windowMax.cardLimit) && setMaxCardsNumber(windowMax.cardLimit);
+
+    } else if (windowWidth <= windowMedium.width && windowWidth >= windowMin.width) {
+
+      (maxCardsNumber <= windowMedium.cardLimit) && setMaxCardsNumber(windowMedium.cardLimit);
+
+    } else if (windowWidth < windowMin.width) {
+
+      (maxCardsNumber <= windowMin.cardLimit) && setMaxCardsNumber(windowMin.cardLimit);
     }
   }, [windowWidth])
 
@@ -29,7 +36,9 @@ export default function useCardsRender(cards) {
   }
 
   function handleMoreButtonClick() {
-    const numberToRender = (windowWidth > 1058 && 3) || (windowWidth <= 1058 && 2);
+    const numberToRender =
+      (windowWidth > windowMedium.width && windowMax.loadNumber)
+      || (windowWidth <= windowMedium.width && windowMedium.loadNumber);
 
     setMaxCardsNumber(maxCardsNumber + numberToRender);
   }

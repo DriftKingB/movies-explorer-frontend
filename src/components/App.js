@@ -1,7 +1,7 @@
 import {
   BrowserRouter as Router,
   Route,
-  Routes
+  Routes,
 } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ import auth from "../utils/Auth";
 import api from "../utils/Api";
 import moviesApi from "../utils/MoviesApi";
 import useMoviesFilter from "../hooks/useMoviesFilter";
-import { customErrors, moviesBaseUrl } from "../utils/constants";
+import { customErrors, moviesBaseUrl, popupMessages } from "../utils/constants";
 
 export default function App() {
   const {
@@ -31,6 +31,7 @@ export default function App() {
 
   const [ responseMessage, setResponseMessage ] = useState(null);
   const [ sideBarIsOpen, setSideBarState ] = useState(false);
+  const [ popupMessage, setPopupMessage ] = useState(null);
   const [ albumIsLoading, setAlbumState ] = useState(false);
 
   useEffect(() => {
@@ -40,13 +41,28 @@ export default function App() {
     }
   }, [tokenIsPresent]);
 
+  useEffect(() => {
+    const timer =  setTimeout(() => setPopupMessage(null), 2500);
+
+    return () => {
+      clearTimeout(timer);
+    }
+  }, [popupMessage])
+
+
+  function handleResponseError({ data, res }) {
+    res?.status === 401 && signout();
+
+    setResponseMessage(`Ошибка: ${data?.message?.toLowerCase()}`);
+  }
+
   function handleSignout(redirectFunc) {
     auth.logout()
       .then(() => {
         signout();
         redirectFunc();
       })
-      .catch(setResponseMessage);
+      .catch(handleResponseError);
   }
 
   function handleProfileSubmit(inputs, loadingFunc) {
@@ -54,8 +70,11 @@ export default function App() {
 
     loadingFunc(true);
     api.updateUserInfo(name.value, email.value)
-      .then(({ data }) => setUser(data))
-      .catch(setResponseMessage)
+      .then(({ data }) => {
+        setUser(data);
+        setPopupMessage(popupMessages.profileEdit);
+      })
+      .catch(handleResponseError)
       .finally(() => loadingFunc(false));
   }
 
@@ -68,7 +87,7 @@ export default function App() {
         signin();
         redirectFunc();
       })
-      .catch(setResponseMessage)
+      .catch(handleResponseError)
       .finally(() => loadingFunc(false));
   }
 
@@ -81,80 +100,90 @@ export default function App() {
         signin();
         redirectFunc();
       })
-      .catch(setResponseMessage)
+      .catch(handleResponseError)
       .finally(() => loadingFunc(false));
   }
 
   function handleMoviesSearch(keyWord, shortsChecked) {
-    setAlbumState(true);
-    moviesApi.getMovies()
-      .then(movies => useMoviesFilter({ movies, keyWord, shortsChecked }))
-      .then(movies => {
-        updateSearchState({ movies, keyWord, shortsChecked })
+    if (searchState.movies) {
+      if (searchState.keyWord === keyWord && searchState.shortsChecked === shortsChecked) {
+        return
+      }
 
-        if (movies.length === 0) {
-          setResponseMessage(customErrors.movieNotFound);
-          return
-        }
+      const filteredMovies = useMoviesFilter({ movies: searchState.movies, keyWord, shortsChecked });
 
-        const moviesToRender = movies.map(searched => {
-          if (savedMovies.some(saved => saved.id === searched.id)) {
-            searched.isLiked = true;
-          }
-          return searched
-        });
+      updateSearchState({ movies: searchState.movies, keyWord, shortsChecked })
+      renderFilteredMovies(filteredMovies);
+    } else {
+      setAlbumState(true);
+      moviesApi.getMovies()
+        .then(movies => {
+          updateSearchState({ movies, keyWord, shortsChecked });
+          return useMoviesFilter({ movies, keyWord, shortsChecked });
+        })
+        .then(movies => renderFilteredMovies(movies))
+        .catch(handleResponseError)
+        .finally(() => setAlbumState(false));
+    }
+  }
 
-        setCards(moviesToRender);
-      })
-      .catch(setResponseMessage)
-      .finally(() => setAlbumState(false));
+  function handleSavedMoviesSearch(keyWord, shortsChecked) {
+    const moviesToRender = useMoviesFilter({ movies: savedMovies, keyWord, shortsChecked });
+
+    setCards(moviesToRender);
+  }
+
+  function renderFilteredMovies(movies) {
+    if (movies.length === 0) {
+      setResponseMessage(customErrors.movieNotFound);
+      return
+    }
+
+    const moviesToRender = movies.map(searched => {
+      if (savedMovies.some(saved => saved.id === searched.id)) {
+        searched.isLiked = true;
+      }
+      return searched
+    });
+
+    setCards(moviesToRender);
   }
 
   function getUserInfo() {
     api.getUserInfo()
       .then(({ data }) => setUser(data))
-      .catch(setResponseMessage);
+      .catch(handleResponseError);
   }
 
-  function getSavedMovies() {
-    api.getMovies()
+  function getSavedMovies({ render = false } = {}) {
+    if (!savedMovies || savedMovies.length === 0) {
+      api.getMovies()
       .then(({ data }) => {
         updateSavedMovies(data);
+        render && setCards(data)
       })
-      .catch(setResponseMessage);
-  }
-
-  function renderSavedMovies() {
-    api.getMovies()
-      .then(({ data }) => {
-        setCards(data);
-        updateSavedMovies(data);
-      })
-      .catch(setResponseMessage);
+      .catch(handleResponseError);
+    } else {
+      render && setCards(savedMovies);
+    }
   }
 
   function getMovies() {
-    console.log(searchState)
     if (!searchState?.movies || searchState?.movies?.length === 0) {
       setCards([]);
       return
     }
 
-    api.getMovies()
-      .then(({ data }) => {
-        const moviesToRender = searchState.movies?.map(searched => {
-          if (data.some(saved => saved.id === searched.id)) {
-            searched.isLiked = true;
-          }
-          return searched
-        });
-
-        setCards(moviesToRender);
-      })
-      .catch(console.log);
+    const moviesToRender = searchState.movies?.map(searched => {
+      if (savedMovies.some(saved => saved.id === searched.id)) {
+        searched.isLiked = true;
+      }
+      return searched
+    })
+      setCards(moviesToRender);
   }
 
-  function handleCardLike(movie) {
+  function handleCardLike(movie, likeFunc) {
     const { country, director, duration, year, description, trailerLink, nameRU, nameEN } = movie;
     const imageLink = `${moviesBaseUrl}${movie.image.url}`;
     const thumbnailLink = `${moviesBaseUrl}${movie.image.formats.thumbnail.url}`;
@@ -163,12 +192,14 @@ export default function App() {
       .then(({ data }) => {
         const moviesToRender = [ ...savedMovies, data ];
 
+        likeFunc(true);
         updateSavedMovies(moviesToRender);
+        setPopupMessage(popupMessages.cardLike)
       })
-      .catch(console.log);
+      .catch(handleResponseError);
   }
 
-  function handleCardDislike(movie, removeCardFromList = false) {
+  function handleCardDislike({ movie, likeFunc, render = false } = {}) {
     api.removeMovie(movie.id)
       .then(({ data }) => {
         const moviesToRender = savedMovies.slice();
@@ -176,15 +207,15 @@ export default function App() {
         moviesToRender.forEach((movie, index)  => {
           if (movie.id === data.id) {
             moviesToRender.splice(index, 1);
+            movie.isLiked = false;
           }
         });
 
+        render ? setCards(moviesToRender) : likeFunc(false);
         updateSavedMovies(moviesToRender);
-        if (removeCardFromList) {
-          setCards(moviesToRender);
-        }
+        setPopupMessage(popupMessages.cardDislike);
       })
-      .catch(console.log);
+      .catch(handleResponseError);
   }
 
   return (
@@ -195,6 +226,8 @@ export default function App() {
               title="ME | Главная"
               sideBarIsOpen={sideBarIsOpen}
               setSideBarState={setSideBarState}
+              popupMessage={popupMessage}
+              setPopupMessage={setPopupMessage}
             />
           }/>
 
@@ -211,6 +244,7 @@ export default function App() {
             setSideBarState={setSideBarState}
             albumIsLoading={albumIsLoading}
             responseMessage={responseMessage}
+            popupMessage={popupMessage}
           />
         }/>
         <Route path="/saved-movies" element={
@@ -218,13 +252,14 @@ export default function App() {
             component={Saved}
             title="ME | Сохранённые фильмы"
             cards={cards}
-            setCards={setCards}
-            renderSavedMovies={renderSavedMovies}
+            getSavedMovies={getSavedMovies}
             onCardDislike={handleCardDislike}
+            onSearch={handleSavedMoviesSearch}
             sideBarIsOpen={sideBarIsOpen}
             setSideBarState={setSideBarState}
             albumIsLoading={albumIsLoading}
             responseMessage={responseMessage}
+            popupMessage={popupMessage}
           />
         }/>
         <Route path="/profile" element={
@@ -237,6 +272,7 @@ export default function App() {
             onSignout={handleSignout}
             responseMessage={responseMessage}
             setResponseMessage={setResponseMessage}
+            popupMessage={popupMessage}
           />
         }/>
 
