@@ -2,55 +2,39 @@ import Footer from "../Footer";
 import Header from "../Header";
 import Album from "../Album";
 import Search from "../Search";
-import AlbumCard from "../AlbumCard";
 import { useEffect } from "react";
 import SideBar from "../SideBar";
+import useCardsRender from "../../hooks/useCardsRender";
+import ResponsePopup from "../ResponsePopup";
 
-export default function Movies({ title }) {
+export default function Movies({ title, cards, getMovies, onSearch, onCardLike, onCardDislike, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage, popupMessage }) {
+  const { maxCardsNumber, moreButtonIsActive, handleMoreButtonClick } = useCardsRender(cards);
+
   useEffect(() => {
     document.title = title;
+    getMovies();
   }, [])
 
   return (
     <>
-      <Header />
+      <Header setSideBarState={setSideBarState} />
       <section className="main">
         <Search
-          shortsChecked={true}
+          onSearch={onSearch}
         />
         <Album
-          cards={
-            <>
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isLiked={true}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isLiked={true}
-              />
-            </>
-          }
+          cards={cards}
+          isLoading={albumIsLoading}
+          onCardLike={onCardLike}
+          onCardDislike={onCardDislike}
+          responseMessage={responseMessage}
+          maxCardsNumber={maxCardsNumber}
+          moreButtonIsActive={moreButtonIsActive}
+          handleMoreButtonClick={handleMoreButtonClick}
         />
-        <section className="more">
-          <button className="more__button" type="button"> Ещё </button>
-        </section>
-        <SideBar />
+        <SideBar isOpen={ sideBarIsOpen } setSideBarState={ setSideBarState } />
       </section>
+      <ResponsePopup message={popupMessage}/>
       <Footer />
     </>
   )

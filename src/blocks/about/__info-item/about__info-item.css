@@ -1,6 +1,12 @@
 .about__info-item {
-  max-width: 41vw;
+  max-width: 550px;
   height: 100%;
+}
+
+@media (max-width: 1280px) {
+  .about__info-item {
+    max-width: 41vw;
+  }
 }
 
 @media (max-width: 450px) {

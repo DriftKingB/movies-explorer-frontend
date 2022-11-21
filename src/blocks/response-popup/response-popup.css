@@ -1,0 +1,17 @@
+.response-popup {
+  padding: 0 20px 0;
+  margin-right: 50px;
+  height: 40px;
+  background-color: #2BE080;
+  border-radius: 6px;
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.08);
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 20px;
+  bottom: 50px;
+  opacity: 0;
+  animation-fill-mode: both;
+}

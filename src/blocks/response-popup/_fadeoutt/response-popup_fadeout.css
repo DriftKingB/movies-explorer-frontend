@@ -1,0 +1,13 @@
+.response-popup_fadeout {
+  opacity: 1;
+  animation: fadeout 0.5s 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  } to {
+    opacity: 0;
+  }
+}

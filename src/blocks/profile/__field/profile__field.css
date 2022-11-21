@@ -1,0 +1,12 @@
+.profile__field {
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.profile__field:not(:last-of-type) {
+  border-bottom: 1px #E8E8E8 solid;
+  margin-bottom: 15px;
+}

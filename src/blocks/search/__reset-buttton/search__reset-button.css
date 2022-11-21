@@ -1,0 +1,21 @@
+.search__reset-button {
+  padding: 0;
+  position: absolute;
+  right: 9px;
+  top: 5px;
+  background-color: transparent;
+  border: 0;
+  width: 36px;
+  height: 36px;
+  background-image: url(../../../images/search__reset-button.svg);
+  background-size: 10px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  visibility: hidden;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.search__reset-button:hover {
+  opacity: 0.7;
+}

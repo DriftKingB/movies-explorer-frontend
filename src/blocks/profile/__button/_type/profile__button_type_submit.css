@@ -1,0 +1,23 @@
+.profile__button_type_submit {
+  padding: 0;
+  width: 150px;
+  height: 40px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #3456F3;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.4s, transform 0.2s;
+}
+
+.profile__button_type_submit:hover {
+  transform: scale(1.02);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .profile__button_type_submit {
+    font-size: calc((25vw + 592px)/56); /* 320px: 12px */
+  }
+}
+

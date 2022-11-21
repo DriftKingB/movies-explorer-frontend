@@ -1,0 +1,13 @@
+.card__form-text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.21;
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .card__form-text {
+    font-size: calc((25vw + 1264px)/112); /* 320px: 12px */
+  }
+}

@@ -2,56 +2,32 @@ import Album from '../Album'
 import Header from '../Header'
 import Search from '../Search'
 import Footer from '../Footer'
-import AlbumCard from '../AlbumCard'
 import { useEffect } from 'react'
 import SideBar from '../SideBar'
+import ResponsePopup from '../ResponsePopup'
 
-export default function Saved({ title }) {
+export default function Saved({ title, cards, getSavedMovies, onCardDislike, onSearch, sideBarIsOpen, setSideBarState, albumIsLoading, responseMessage, popupMessage }) {
   useEffect(() => {
     document.title = title;
+    getSavedMovies({ render: true });
   }, [])
 
   return (
     <>
-      <Header />
+      <Header setSideBarState={setSideBarState} />
       <section className="main">
         <Search
-          shortsChecked={false}
+          cards={cards}
+          onSearch={onSearch}
         />
         <Album
-          cards={
-            <>
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isSaved={true}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isLiked={true}
-                isSaved={true}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isSaved={true}
-              />
-              <AlbumCard
-                img={"https://www.ghimprove.com/_blog/images/posts/hello-world/mountain.jpg"}
-                title={"33 слова о дизайне"}
-                subline={"1ч 47м"}
-                isLiked={true}
-                isSaved={true}
-              />
-            </>
-          }
+          cards={cards}
+          isLoading={albumIsLoading}
+          onCardDislike={onCardDislike}
+          responseMessage={responseMessage}
         />
-        <section className="more" />
-        <SideBar />
+        <SideBar isOpen={ sideBarIsOpen } setSideBarState={ setSideBarState } />
+        <ResponsePopup message={popupMessage} />
       </section>
       <Footer />
     </>

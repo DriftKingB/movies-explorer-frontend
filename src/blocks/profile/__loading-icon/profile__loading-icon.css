@@ -1,0 +1,7 @@
+.profile__loading-icon {
+  background-image: url(../../../images/auth-form__loading-icon.svg);
+  background-size: contain;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}

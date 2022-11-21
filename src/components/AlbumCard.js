@@ -1,16 +1,55 @@
-export default function AlbumCard({ img, title, subline, isSaved, isLiked }) {
+import { useEffect, useState } from "react";
+import { moviesBaseUrl } from "../utils/constants";
+
+export default function AlbumCard({ card, onMainPage, onLike, onDislike }) {
+  const [ isLiked, setIsLiked ] = useState(card.isLiked);
+  const imageLink =  onMainPage ? (card.image?.url && `${moviesBaseUrl}${card.image?.url}`) : card.image;
+  const drt = card.duration;
+  const duration = (drt < 60 && `${drt} м`) || (drt === 60 && `1 ч`) || (drt > 60 && `${Math.floor(drt/60)} ч ${drt % 60} м`);
+
+  useEffect(() => {
+    setIsLiked(card.isLiked);
+  }, [card.isLiked])
+
+  function handleLikeButtonClick() {
+    if (isLiked) {
+      onDislike({ movie: card, likeFunc: setIsLiked});
+    } else {
+      onLike(card, setIsLiked);
+    }
+  }
+  function handleRemoveButtonClick() {
+    onDislike({ movie: card, render: true });
+  }
+
   return (
-    <li className={`card ${isSaved ? 'card_saved' : ''}`}>
-      <div className="card__image-container">
-        <img className="card__image" src={ img } alt={ title } />
-      </div>
+    <li className="card" id={card.id}>
+      <a href={card.trailerLink} target="blank" className="card__image-link">
+        <div className="card__image-container">
+          <img className="card__image" src={ imageLink } alt={ card.nameRU } />
+        </div>
+      </a>
       <div className="card__tab">
-        <p className="card__title"> { title } </p>
-        { isSaved ?
-          <button className="card__remove-button" type="button" /> :
-          <button className={`card__like-button ${isLiked ? 'card__like-button_active' : ''}`} type="button" /> }
+        <p className="card__title"> { card.nameRU } </p>
+          <div className="card__handlers">
+            { onMainPage ?
+              <button
+                className={`card__like-button ${isLiked ? 'card__like-button_active' : ''}`}
+                type="button"
+                onClick={handleLikeButtonClick}
+              /> :
+              <button
+                className="card__remove-button"
+                type="button"
+                onClick={handleRemoveButtonClick}
+              />}
+            {/* <form className="card__form">
+              <p className="card__form-text"> Удалить фильм из сохранённых? </p>
+              <button className="card__form-submit-button" type="submit" />
+            </form> */}
+          </div>
       </div>
-      <p className="card__subline"> { subline } </p>
+      <p className="card__subline"> { duration } </p>
     </li>
   )
 }

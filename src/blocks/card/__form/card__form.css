@@ -1,0 +1,10 @@
+.card__form {
+  border-radius: 6px;
+  position: absolute;
+  background-color: #fff;
+  border: 1px #000 solid;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 80px;
+}

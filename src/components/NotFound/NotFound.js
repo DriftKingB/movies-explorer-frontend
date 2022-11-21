@@ -9,10 +9,12 @@ export default function NotFound({ title }) {
   }, [])
 
   return (
-    <section className="notfound">
-      <h1 className="notfound__heading"> 404 </h1>
-      <p className="notfound__subline"> Страница не найдена </p>
-      <button className="notfound__link" type="button" onClick={() => navigate(-1)}> Назад </button>
+    <section className="main">
+      <section className="notfound">
+        <h1 className="notfound__heading"> 404 </h1>
+        <p className="notfound__subline"> Страница не найдена </p>
+        <button className="notfound__link" type="button" onClick={() => navigate(-1)}> Назад </button>
+      </section>
     </section>
   )
 }
