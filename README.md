@@ -6,4 +6,7 @@
 
 Ссылка на репозиторий: https://github.com/DriftKingB/movies-explorer-frontend
 
-Проект: https://removie.students.nomoredomains.icu/
+Адреса:
+* IP 158.160.50.197
+* Frontend https://removie.students.nomoredomains.icu/
+* Backend https://api.removie.students.nomoredomains.icu/
